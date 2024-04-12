@@ -561,6 +561,31 @@ class Game {
     this.hideHelp();
     this.chooseRenderMenu();
   }
+  //hiển thị tên chế độ chơi
+  renderTitle() {
+    const titleEl = document.querySelector(".level__title");
+    titleEl.innerHTML = levels[this.getIndexLevel()].title;
+  }
+  //hiển thị level
+  renderLevel() {
+    const current__level = document.querySelector(".current__level");
+    current__level.innerHTML = levels[this.getIndexLevel()].level;
+  }
+  //hiển thị điểm
+  renderScore() {
+    const current__score = document.querySelector(".current__score");
+    current__score.innerHTML = this.score;
+  }
+  //hiển thị máu còn lại
+  renderBlood() {
+    const current__blood = document.querySelector(".current__blood");
+    current__blood.innerHTML = this.blood;
+  }
+  //hiển thị số lượng vòng chơi
+  renderRound() {
+    const current__round = document.querySelector(".current__round");
+    current__round.innerHTML = this.round;
+  }
   //khởi tạo thanh thời gian đếm ngược
   renderTimeBar() {
     const timeBar = document.querySelector(".time__bar");
@@ -585,7 +610,6 @@ class Game {
     var div = document.createElement("div");
     div.classList.add("main__wrap__show");
     div.arrPiece = this.algorithms.newArray(17);
-    //khởi tạo thẻ game tại vị trí ij
     for (var i = 1; i <= 16; i++) {
       for (var j = 1; j <= 9; j++) {
         div.arrPiece[i][j] = this.section(
@@ -690,8 +714,90 @@ class Game {
       }
     });
   }
-  
+  //vẽ đường đi từ thẻ này sang  thẻ khác
+  DrawPath(arrayList, help = false) {
+    const mainWrapShowEl = document.querySelector(".main__wrap__show");
+    let point1 = arrayList[0];
+    let point2;
+    let centre1, centre2;
+    let i, rectDraw;
+    for (i = 1; i < arrayList.length; i++) {
+      const divPath = document.createElement("div");
+      point2 = arrayList[i];
+      centre1 = this.draw.findCentre(point1.x, point1.y);
+      centre2 = this.draw.findCentre(point2.x, point2.y);
+      rectDraw = this.draw.getRectDraw(centre1, centre2);
+      divPath.style.left = rectDraw.x + "px";
+      divPath.style.top = rectDraw.y + "px";
+      divPath.style.width = rectDraw.width + "px";
+      divPath.style.height = rectDraw.height + "px";
+      divPath.style.position = "absolute";
+      divPath.style.backgroundColor = help ? "red" : "#fff";
+      divPath.style.pointerEvents = "none";
+      mainWrapShowEl.append(divPath);
+      point1 = point2;
+    }
+  }
+  playSuccessSound() {
+    const successEl = document.querySelector(".success__sound");
+    const failEl = document.querySelector(".fail__sound");
+    failEl.pause();
+    successEl.load();
+    successEl.play();
+  }
+  playFailSound() {
+    const failEl = document.querySelector(".fail__sound");
+    const successEl = document.querySelector(".success__sound");
+    successEl.pause();
+    failEl.load();
+    failEl.play();
+  }
+  renderInfoBox() {
+    const box__lv = document.querySelector(".box__lv");
+    const box__round = document.querySelector(".box__round");
+    const box__score = document.querySelector(".box__score");
+    box__lv.innerHTML = this.level;
+    box__round.innerHTML = this.round;
+    box__score.innerHTML = this.score;
+  }
+  renderNoBlood() {
+    const main__board__box = document.querySelector(".main__board__box");
+    const main__board__layer = document.querySelector(".main__board__layer");
+    main__board__layer.style.opacity = "80%";
+    main__board__layer.style.zIndex = 2;
+    main__board__box.style.display = "flex";
+    clearInterval(timeInterval);
+    main__board__box.innerHTML = getBox("Bạn đã hết lượt chơi");
+    this.renderInfoBox();
+    this.playAgain();
+    this.chooseRenderMenu();
+  }
+  renderNoTime() {
+    this.playFailSound();
+    const main__board__box = document.querySelector(".main__board__box");
+    const main__board__layer = document.querySelector(".main__board__layer");
+    main__board__layer.style.opacity = "80%";
+    main__board__layer.style.zIndex = 2;
+    main__board__box.style.display = "flex";
+    clearInterval(timeInterval);
+    main__board__box.innerHTML = getBox("Bạn đã hết thời gian");
+    this.renderInfoBox();
+    this.playAgain();
+    this.chooseRenderMenu();
+  }
 }
-
+//box hiên ra khi người dùng hết thời gian hoặc hết máu
+function getBox(title) {
+  return `<div class="box__wrap">
+    <h5>${title}</h5>
+    <p>Cấp độ: <span class="box__lv"></span></p>
+    <p>Vòng: <span class="box__round"></span></p>
+    <p>Điểm đạt được: <span class="box__score"></span></p>
+    <div class="box__btn">
+      <button class="again__btn">Chơi lại</button>
+      <button class="menu__btn">Trang chủ</button>
+    </div>
+  </div>`;
+}
 const gameClass = new Game(algorithmsClass, section);
 gameClass.init();
