@@ -23,6 +23,7 @@ class algorithms {
     let stop;
 
     for (i = 0; i < 18; i++) for (j = 0; j < 11; j++) a[i][j] = 0;
+    //16x9 = 144 thẻ
     remain = 144;
     for (k = 1; k <= 36; k++) {
       for (t = 1; t <= 4; t++) {
@@ -377,7 +378,50 @@ class algorithms {
 }
 
 const algorithmsClass = new algorithms();
+// Vẽ đường đi giữa 2 thẻ
+class draw {
+  constructor() {}
+  //đưa vào 2 điểm
+  getRectDraw(p1, p2) {
+    var x1, y1, x2, y2;
+    //so sánh tọa độ và gán cho các biến
+    //tìm tọa độ có vị trí xa nhất so với gốc
+    if (p1.x < p2.x) {
+      x1 = p1.x;
+      x2 = p2.x;
+    } else {
+      x2 = p1.x;
+      x1 = p2.x;
+    }
+    if (p1.y < p2.y) {
+      y1 = p1.y;
+      y2 = p2.y;
+    } else {
+      y2 = p1.y;
+      y1 = p2.y;
+    }
+    // trả về khoảng cách giữa 2 điểm
+    return {
+      x: x1 - 3,
+      y: y1 - 3,
+      //vd: a cách gốc 50px, b cách gốc 70px => 70-50 là khoảng cách từ a đến b
+      width: x2 - x1 + 6,
+      height: y2 - y1 + 6,
+    };
+  }
+  //tìm tọa độ trung tâm của thẻ 
+  //i,j là index của thẻ trong matrix
+  //minh họa: mỗi thẻ chiếm diện tích x = 42, y = 52 thì điểm trung tâm thẻ thứ 3 dòng 1 
+  //sẽ ở vị trí cách left 84px(tương đương với chiều ngang 2 thẻ) + 42px/2(1 nửa chiều ngang của thẻ), cách top 0px + 52/2px(1 nữa chiều dọc của thẻ)
+  findCentre(i, j) {
+    return {
+      x: i * 42 + 42 / 2,
+      y: j * 52 + 52 / 2,
+    };
+  }
+}
 
+const drawClass = new draw();
 // Tạo khung cho game (các ô hình ảnh trong game)
 function section(board, col, row, value, firstActive) {
   let PieceWidth = 42;
@@ -532,6 +576,14 @@ class Game {
     const menu__btns = document.querySelectorAll(".menu__btn");
     menu__btns.forEach((btn) => {
       btn.onclick = () => {
+        const main__board__box = document.querySelector(".main__board__box");
+        const main__board__layer = document.querySelector(".main__board__layer");
+        main__board__layer.style.opacity = "50%";
+        main__board__layer.style.zIndex = 0;
+        main__board__box.innerHTML = "";
+        main__board__box.style.display = "none";
+        this.round = 1;
+        this.score = 0;
         this.renderMenuBoard();
       };
     });
@@ -548,18 +600,18 @@ class Game {
     this.blood = levels[this.getIndexLevel()].blood;
     this.duration = levels[this.getIndexLevel()].duration;
     this.loadImagesIcon();
-    this.renderLevelOption();
     this.renderTitle();
     this.renderLevel();
     this.renderScore();
     this.renderBlood();
     this.renderTimeBar();
     this.renderRound();
+    this.chooseRenderMenu();
+    this.renderLevelOption();
     this.playAgain();
     this.chooseRepair();
     this.chooseHelp();
     this.hideHelp();
-    this.chooseRenderMenu();
   }
   //hiển thị tên chế độ chơi
   renderTitle() {
@@ -592,6 +644,7 @@ class Game {
     const timeText = document.querySelector(".time__text");
     timeBar.style.height = this.duration / 2 + "px";
     timeText.innerHTML = this.duration;
+    //cứ mỗi 1 giây thời gian sẽ giảm đi 1 -> cho tới khi bằng 0 sẽ cho hiện getBox và tái tạo lại màn chơi
     timeInterval = setInterval(() => {
       this.duration--;
       if (this.duration === 0) {
@@ -671,9 +724,10 @@ class Game {
                   const checkHavePath = this.algorithms.checkHavePath(
                     this.arrImages
                   );
-                  //khi hết màn sẽ kiểm tra level hiện tại và cộng 1, nếu là lv6 sẽ trở về lv1.
+                  //khi hết màn sẽ tăng level thêm 1, kiểm tra level hiện tại nếu là lv6 sẽ trở về lv1.
                   if (this.algorithms.checkFinishRound(this.arrImages)) {
                     this.round++;
+                    this.playSuccessSound();
                     if (this.level === 6) {
                       this.level = 1;
                     } else {
@@ -693,7 +747,7 @@ class Game {
                 //trường hợp nếu giữa 2 thẻ không có đường đi thì trừ máu
               } else {
                 this.blood--;
-                //nếu màu về 0 thì khởi tạo lại màn chơi
+                //nếu máu về 0 thì cho hiện getbox và khởi tạo lại màn chơi
                 if (this.blood === 0) {
                   this.renderNoBlood();
                 }
@@ -715,7 +769,7 @@ class Game {
     });
   }
   //vẽ đường đi từ thẻ này sang  thẻ khác
-  DrawPath(arrayList, help = false) {
+  drawPath(arrayList, help = false) {
     const mainWrapShowEl = document.querySelector(".main__wrap__show");
     let point1 = arrayList[0];
     let point2;
@@ -738,6 +792,7 @@ class Game {
       point1 = point2;
     }
   }
+  // xử lí sounds
   playSuccessSound() {
     const successEl = document.querySelector(".success__sound");
     const failEl = document.querySelector(".fail__sound");
@@ -752,6 +807,7 @@ class Game {
     failEl.load();
     failEl.play();
   }
+  //lấy thông tin để gán vào getBox()
   renderInfoBox() {
     const box__lv = document.querySelector(".box__lv");
     const box__round = document.querySelector(".box__round");
@@ -761,29 +817,51 @@ class Game {
     box__score.innerHTML = this.score;
   }
   renderNoBlood() {
+    this.playFailSound
+    //Đây là 1 lớp layer, về cơ bản nó vẫn tồn tại nhưng bị đè bởi các lớp khác, 
+    //khi thua nó sẽ được di chuyển lên để che đi các lớp khác,
     const main__board__box = document.querySelector(".main__board__box");
     const main__board__layer = document.querySelector(".main__board__layer");
     main__board__layer.style.opacity = "80%";
     main__board__layer.style.zIndex = 2;
     main__board__box.style.display = "flex";
+    //=============
     clearInterval(timeInterval);
     main__board__box.innerHTML = getBox("Bạn đã hết lượt chơi");
     this.renderInfoBox();
-    this.playAgain();
     this.chooseRenderMenu();
+    this.playAgain();
   }
   renderNoTime() {
     this.playFailSound();
+    //Đây là 1 lớp layer, về cơ bản nó vẫn tồn tại nhưng bị đè bởi các lớp khác, 
+    //khi thua nó sẽ được di chuyển lên để che đi các lớp khác,
     const main__board__box = document.querySelector(".main__board__box");
     const main__board__layer = document.querySelector(".main__board__layer");
     main__board__layer.style.opacity = "80%";
     main__board__layer.style.zIndex = 2;
     main__board__box.style.display = "flex";
+    //=============
     clearInterval(timeInterval);
     main__board__box.innerHTML = getBox("Bạn đã hết thời gian");
     this.renderInfoBox();
-    this.playAgain();
     this.chooseRenderMenu();
+    this.playAgain();
+  }
+  renderLevelOption(){
+
+  }
+  playAgain(){
+
+  }
+  chooseRepair(){
+
+  }
+  chooseHelp(){
+
+  }
+  hideHelp(){
+
   }
 }
 //box hiên ra khi người dùng hết thời gian hoặc hết máu
@@ -799,5 +877,5 @@ function getBox(title) {
     </div>
   </div>`;
 }
-const gameClass = new Game(algorithmsClass, section);
+const gameClass = new Game(algorithmsClass, section, drawClass);
 gameClass.init();
