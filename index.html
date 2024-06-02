@@ -1,0 +1,143 @@
+<!-- 21130430_TranHuuLoc_0342761815_T3-T123 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Game</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <div class="main" style="background-image: url(./images/bg.gif)">
+      <div class="main_board">
+        <div class="main_board_wrap">
+          <div class="main_info">
+            <div class="">
+              <button class="menu_btn">Trang chủ <i class="fa-solid fa-house"></i></button>
+              <button class="again_btn">Chơi lại <i class="fa-solid fa-rotate-right"></i></button>
+            </div>
+            <div class="level">
+              <span>Chọn màn chơi</span>
+              <select class="level_select" name="" id=""></select>
+            </div>
+            <div class="game_helper">
+              <button class="fix_btn"><i class="fa-solid fa-right-left"></i></button>
+              <button class="help_btn"><i class="fa-solid fa-lightbulb"></i></button>
+            </div>
+          </div>
+          <div class="main_wrap">
+            <div class="main_time">
+              <h5>Thời gian còn lại</h5>
+              <div class="time_bar_wrap">
+                <div class="time_bar"></div>
+                <span class="time_text"></span>
+              </div>
+            </div>
+            <div class="main_wrap_box"></div>
+          </div>
+          <!-- main time -->
+          <div class="info_board">
+            <h5>Cấp</h5>
+            <span class="current_level"></span>
+            <h5 class="blood">Máu</h5>
+            <span class="current_blood"></span>
+            <h5>Điểm</h5>
+            <span class="current_score"></span>
+            <h5>Vòng</h5>
+            <span class="current_round"></span>
+          </div>
+          <!-- --- -->
+        </div>
+        <div class="main_board_layer"></div>
+        <div class="main_board_box"></div>
+      </div>
+      <div class="menu_board">
+        <div class="menu_board_wrap" style="display: flex; text-align: center;">
+          <h1>Pikachu <br> Game</h1>
+          <button class="start_btn">Chơi ngay</button>
+          <!-- Button trigger modal hướng dẫn chơi game -->          
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gameGuider" onclick="playVideo()">
+            Hướng dẫn <i class="fa-solid fa-book"></i>
+          </button>         
+          <!-- Button trigger modal giới thiệu bản thân -->          
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myInfo">
+            Giới thiệu bản thân
+          </button>         
+        </div>
+        <div class="menu_board_layer"></div>
+      </div>
+      <div class="guider_layer"></div>
+      <!-- modal box hướng dẫn game -->
+      <div class="modal fade" id="gameGuider" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" onclick="pauseVideo()">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Hướng dẫn chơi game</h5>
+            </div>
+            <div class="modal-body">
+              <video id="videoGuider" width="100%" height="100%">
+                <source src="./images/gameGuider.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="pauseVideo()">Close</button>
+            </div>
+          </div>
+        </div>
+      </div> 
+      <!-- ------------ -->
+      <!-- modal box info -->
+      <div class="modal fade" id="myInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Thông tin</h5>
+            </div>
+            <div class="modal-body">
+              <div><Strong>Họ và Tên: </Strong>Trần Hữu Lộc</div>
+              <div><Strong>MSSV: </Strong>21130430</div>
+              <div><Strong>Lớp: </Strong>DH21DTC</div>
+              <div><Strong>Năm sinh: </Strong>24/11/2003</div>
+              <div><Strong>Quê quán: </Strong>Châu Đức, Bà Rịa - Vũng Tàu</div>
+              <div>Hiện tại là sinh viên năm 3 trường Đại học Nông Lâm tp.HCM</div>
+              <div>Tìm hiểu thêm về tôi: <a href="./cv/21130430_Tran_Huu_Loc.html">My CV</a></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div> 
+      <!-- ------------ -->
+      <audio class="fail_sound" src="./sounds/fail-sound.mp3"></audio>
+      <audio class="success_sound" src="./sounds/success-sound.mp3"></audio>
+    </div>
+    <!-- script -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="module" src="./game.js"></script>
+    <script> 
+      var myVideo = document.getElementById("videoGuider"); 
+      var modalContent = document.getElementsByClassName("modal-content");
+
+      modalContent.click = () => {
+          myVideo.play();
+      }
+      function pauseVideo() { 
+          myVideo.pause(); 
+      }
+      function playVideo() { 
+          myVideo.load();
+          myVideo.play(); 
+      }
+      </script> 
+    <!-- ------- -->
+  </body>
+</html>
