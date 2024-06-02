@@ -2,21 +2,23 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
 }
 
 .main {
-  height: 700px;
-  width: 1500px;
+  height: 100vh;
+  width: 100vw;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.main .menu__board {
+.main .menu_board {
   height: 100%;
   width: 100%;
   position: relative;
 }
-.main .menu__board .menu__board__wrap {
+.main .menu_board .menu_board_wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,15 +30,17 @@
   right: 0;
   z-index: 1;
 }
-.main .menu__board .menu__board__wrap h1 {
-  font-size: 80px;
+.main .menu_board .menu_board_wrap h1 {
+  font-size: 90px;
   margin-bottom: 20px;
   color: rgb(230, 0, 255);
 }
-.main .menu__board .menu__board__wrap button {
-  background-color: blue;
+.main .menu_board .menu_board_wrap button {
+  background-color: #e600ff;
+  margin-bottom: 30px;
+  color: #fff;
 }
-.main .menu__board .menu__board__layer {
+.main .menu_board .menu_board_layer {
   position: absolute;
   top: 0;
   left: 0;
@@ -57,24 +61,24 @@
 .main button:hover {
   opacity: 0.5;
 }
-.main .menu__btn {
-  background-color: blue;
+.main .menu_btn {
+  background-color: #B19470;
 }
-.main .again__btn {
-  background-color: green;
+.main .again_btn {
+  background-color: #B19470;
 }
-.main .fix__btn {
-  background-color: orange;
+.main .fix_btn {
+  background-color: #B19470;
 }
-.main .help__btn {
-  background-color: orangered;
+.main .help_btn {
+  background-color: #B19470;
 }
-.main .main__board {
+.main .main_board {
   width: 100%;
   height: 100%;
   position: relative;
 }
-.main .main__board .main__board__wrap {
+.main .main_board .main_board_wrap {
   z-index: 1;
   position: absolute;
   top: 0;
@@ -83,94 +87,120 @@
   bottom: 0;
   display: flex;
 }
-.main .main__board .main__board__wrap .main__info {
+.main .main_board .main_board_wrap .main_info {
   padding: 100px 0;
-  width: 20%;
+  width: 15%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.main .main__board .main__board__wrap .main__info .level {
+.main .main_board .main_board_wrap .main_info .level {
+  padding: 20vh 0;
   display: flex;
   align-items: center;
   margin: 10px 0;
+  flex-direction: column;
 }
-.main .main__board .main__board__wrap .main__info .level span {
-  color: orangered;
+.main .main_board .main_board_wrap .main_info .level span {
+  color: #b1a325;
   margin-right: 5px;
-  font-size: 24px;
+  font-size: 30px;
 }
-.main .main__board .main__board__wrap .main__info .level select {
-  background-color: orange;
+.main .main_board .main_board_wrap .main_info .level select {
+  background-color: #B19470;
   padding: 5px 2px;
   border-radius: 4px;
+  width: 60%;
+  text-align: center;
   cursor: pointer;
 }
-.main .main__board .main__board__wrap .main__info .level select option {
+.main .main_board .main_board_wrap .main_info .level select option {
   cursor: pointer;
 }
-.main .main__board .main__board__wrap .main__info button {
+.main .main_board .main_board_wrap .main_info .game_helper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 300px;
+  justify-content: space-between;
+}
+.main .main_board .main_board_wrap .main_info .game_helper i {
+  font-size: 30px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main .main_board .main_board_wrap .main_info .game_helper button {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.main .main_board .main_board_wrap .main_info button {
   cursor: pointer;
 }
-.main .main__board .main__board__wrap .main__info h5 {
+.main .main_board .main_board_wrap .main_info h5 {
   font-size: 40px;
   color: orange;
   margin: 20px 0;
 }
-.main .main__board .main__board__wrap .main__info span {
+.main .main_board .main_board_wrap .main_info span {
   font-size: 32px;
   color: yellow;
 }
-.main .main__board .main__board__wrap .main__info .blood {
-  color: red;
-}
-.main .main__board .main__board__wrap .main__info .current__blood {
-  color: rgb(222, 47, 47);
-}
-.main .main__board .main__board__wrap .main__wrap {
+.main .main_board .main_board_wrap .main_wrap {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.main .main__board .main__board__wrap .main__wrap h2 {
-  font-size: 40px;
-  color: orangered;
-}
-.main .main__board .main__board__wrap .main__wrap h2 span {
-  color: yellow;
-}
-.main .main__board .main__board__wrap .main__time {
-  padding: 100px 0;
-  width: 20%;
+.main .main_board .main_board_wrap .main_wrap .main_time {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
-.main .main__board .main__board__wrap .main__time h5 {
+.main .main_board .main_board_wrap .main_wrap .main_time h5 {
   font-size: 42px;
-  color: orange;
+  color: #B19470;
 }
-.main .main__board .main__board__wrap .main__time .time__bar__wrap {
+.main .main_board .main_board_wrap .main_wrap .main_time .time_bar_wrap {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: end;
 }
-.main .main__board .main__board__wrap .main__time .time__bar__wrap .time__bar {
-  width: 20px;
-  background-image: linear-gradient(129.1deg, rgb(243, 199, 83) 26.8%, rgb(18, 235, 207) 114.1%);
+.main .main_board .main_board_wrap .main_wrap .main_time .time_bar_wrap .time_bar {
+  height: 20px;
+  background-image: linear-gradient(90deg, #AFD198, #E8EFCF, #AFD198);
   border-radius: 10px;
 }
-.main .main__board .main__board__wrap .main__time .time__bar__wrap span {
+.main .main_board .main_board_wrap .main_wrap .main_time .time_bar_wrap span {
   font-size: 32px;
-  color: yellow;
+  color: #B19470;
 }
-.main .main__board .main__board__layer {
+.main .main_board .main_board_wrap .info_board {
+  height: 80%;
+  font-size: 40px;
+  color: #B19470;
+  display: flex;
+  width: 15%;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10vh;
+  flex-direction: column;
+}
+.main .main_board .main_board_wrap .info_board span {
+  color: #F8F6E3;
+}
+.main .main_board .main_board_layer {
   position: absolute;
   top: 0;
   left: 0;
@@ -179,7 +209,7 @@
   background: #000;
   opacity: 0.6;
 }
-.main .main__board .main__board__box {
+.main .main_board .main_board_box {
   display: none;
   align-items: center;
   justify-content: center;
@@ -190,28 +220,36 @@
   right: 0;
   bottom: 0;
 }
-.main .main__board .main__board__box .box__wrap {
+.main .main_board .main_board_box .box_wrap {
   background-color: rgb(19, 19, 19);
   padding: 10px 20px;
   border-radius: 20px;
 }
-.main .main__board .main__board__box .box__wrap h5 {
+.main .main_board .main_board_box .box_wrap h5 {
   font-size: 32px;
   color: red;
 }
-.main .main__board .main__board__box .box__wrap p {
-  font-size: 24px;
+.main .main_board .main_board_box .box_wrap p {
+  font-size: 30px;
   color: orange;
   margin: 5px 0;
 }
-.main .main__board .main__board__box .box__wrap p span {
+.main .main_board .main_board_box .box_wrap p span {
   color: yellow;
 }
-.main .main__board .main__board__box .box__btn {
+.main .main_board .main_board_box .box_btn {
   margin-top: 20px;
   justify-content: end;
   display: flex;
 }
-.main .main__board .main__board__box .box__btn button {
+.main .main_board .main_board_box .box_btn button {
   margin-left: 10px;
+}
+
+.modal-backdrop {
+  z-index: 2;
+}
+
+.btn-secondary {
+  background-color: #e600ff;
 }/*# sourceMappingURL=style.css.map */

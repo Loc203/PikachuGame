@@ -2,18 +2,20 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
   }
   .main {
-    height: 700px;
-    width: 1500px;
+    height: 100vh;
+    width: 100vw;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    .menu__board {
+    .menu_board {
       height: 100%;
       width: 100%;
       position: relative;
-      .menu__board__wrap {
+      .menu_board_wrap {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -25,15 +27,17 @@
         right: 0;
         z-index: 1;
         h1 {
-          font-size: 80px;
+          font-size: 90px;
           margin-bottom: 20px;
           color: rgb(230, 0, 255);
         }
         button {
-          background-color: blue;
+          background-color: #e600ff;
+          margin-bottom: 30px;
+          color: #fff;
         }
       }
-      .menu__board__layer {
+      .menu_board_layer {
         position: absolute;
         top: 0;
         left: 0;
@@ -55,23 +59,23 @@
         opacity: 0.5;
       }
     }
-    .menu__btn {
-      background-color: blue;
+    .menu_btn {
+      background-color: #B19470;
     }
-    .again__btn {
-      background-color: green;
+    .again_btn {
+      background-color: #B19470;
     }
-    .fix__btn {
-      background-color: orange;
+    .fix_btn {
+      background-color: #B19470;
     }
-    .help__btn {
-      background-color: orangered;
+    .help_btn {
+      background-color: #B19470;
     }
-    .main__board {
+    .main_board {
       width: 100%;
       height: 100%;
       position: relative;
-      .main__board__wrap {
+      .main_board_wrap {
         z-index: 1;
         position: absolute;
         top: 0;
@@ -79,30 +83,54 @@
         right: 0;
         bottom: 0;
         display: flex;
-        .main__info {
+        .main_info {
           padding: 100px 0;
-          width: 20%;
+          width: 15%;
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
           .level {
+            padding: 20vh 0;
             display: flex;
             align-items: center;
             margin: 10px 0;
+            flex-direction: column;
             span {
-              color: orangered;
+              color: #b1a325;
               margin-right: 5px;
-              font-size: 24px;
+              font-size: 30px;
             }
             select {
-              background-color: orange;
+              background-color: #B19470;
               padding: 5px 2px;
               border-radius: 4px;
+              width: 60%;
+              text-align: center;
               cursor: pointer;
               option {
                 cursor: pointer;
               }
+            }
+          }
+          .game_helper{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            height: 300px;
+            justify-content: space-between;
+            i{
+              font-size: 30px;
+              width: 40px;
+              height: 40px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+            button{
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 20px;
             }
           }
           button {
@@ -117,61 +145,63 @@
             font-size: 32px;
             color: yellow;
           }
-          .blood {
-            color: red;
-          }
-          .current__blood {
-            color: rgb(222, 47, 47);
-          }
         }
-        .main__wrap {
+        .main_wrap {
           flex: 1;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          h2 {
-            font-size: 40px;
-            color: orangered;
-            span {
-              color: yellow;
-            }
-          }
-        }
-        .main__time {
-          padding: 100px 0;
-          width: 20%;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          align-items: center;
-          h5 {
-            font-size: 42px;
-            color: orange;
-          }
-          .time__bar__wrap {
-            flex: 1;
+          .main_time {
+            width: 100%;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: end;
-            .time__bar {
-              width: 20px;
-              background-image: linear-gradient(
-                129.1deg,
-                rgba(243, 199, 83, 1) 26.8%,
-                rgba(18, 235, 207, 1) 114.1%
-              );
-              border-radius: 10px;
+            h5 {
+              font-size: 42px;
+              color: #B19470;
             }
-            span {
-              font-size: 32px;
-              color: yellow;
+            .time_bar_wrap {
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: end;
+              .time_bar {
+                height: 20px;
+                background-image: linear-gradient(
+                  90deg,
+                  #AFD198,
+                  #E8EFCF,
+                  #AFD198);
+                border-radius: 10px;
+              }
+              span {
+                font-size: 32px;
+                color: #B19470;
+              }
             }
           }
+      }
+      .info_board {
+        height: 80%;
+        font-size: 40px;
+        color: #B19470;
+        display: flex;
+        width: 15%;
+        flex-wrap: nowrap;
+        align-content: center;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10vh;
+        flex-direction: column;
+        span {
+          color: #F8F6E3;
         }
       }
-      .main__board__layer {
+    }
+      .main_board_layer {
         position: absolute;
         top: 0;
         left: 0;
@@ -180,7 +210,7 @@
         background: #000;
         opacity: 0.6;
       }
-      .main__board__box {
+      .main_board_box {
         display: none;
         align-items: center;
         justify-content: center;
@@ -190,7 +220,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        .box__wrap {
+        .box_wrap {
           background-color: rgb(19, 19, 19);
           padding: 10px 20px;
           border-radius: 20px;
@@ -199,7 +229,7 @@
             color: red;
           }
           p {
-            font-size: 24px;
+            font-size: 30px;
             color: orange;
             margin: 5px 0;
             span {
@@ -207,7 +237,7 @@
             }
           }
         }
-        .box__btn {
+        .box_btn {
           margin-top: 20px;
           justify-content: end;
           display: flex;
@@ -217,4 +247,10 @@
         }
       }
     }
+  }
+  .modal-backdrop{
+    z-index: 2;
+  }
+  .btn-secondary{
+    background-color: #e600ff;
   }
